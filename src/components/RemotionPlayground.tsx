@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { TemplateSelector } from "./TemplateSelector";
 import { SingleAnimationPlayer } from "./animation/SingleAnimationPlayer";
 import { templates, type RemotionTemplate } from "@/templates";

@@ -4,6 +4,7 @@ export const textRotation = {
   description: "Animated text with rotating words that dissolve and crossfade",
   durationInFrames: 240,
   fps: 30,
+  category: "Text" as const,
   code: `() => {
   const frame = Remotion.useCurrentFrame();
 

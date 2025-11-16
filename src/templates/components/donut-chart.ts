@@ -4,6 +4,7 @@ export const donutChart = {
   description: "Animated donut chart with data distribution visualization",
   durationInFrames: 180,
   fps: 30,
+  category: "Charts" as const,
   code: `() => {
   const frame = Remotion.useCurrentFrame();
   const { width, height, fps } = Remotion.useVideoConfig();

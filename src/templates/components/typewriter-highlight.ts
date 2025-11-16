@@ -4,6 +4,7 @@ export const typewriterHighlight = {
   description: "Typewriter effect with animated highlight on specific word",
   durationInFrames: 200,
   fps: 30,
+  category: "Text" as const,
   code: `() => {
   const frame = Remotion.useCurrentFrame();
   const { fps } = Remotion.useVideoConfig();
@@ -13,7 +14,7 @@ export const typewriterHighlight = {
   const COLOR_HIGHLIGHT = "#A7C7E7";
 
   // Text
-  const FULL_TEXT = "From prompt to motion graphics. This is Remotion.";
+  const FULL_TEXT = "From code to motion graphics. This is Remotion.";
   const HIGHLIGHT_WORD = "Remotion";
   const CARET_SYMBOL = "▌";
   const SPLIT_AFTER = " This is Remotion.";

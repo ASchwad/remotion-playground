@@ -4,44 +4,81 @@ export const counterAnimation = {
   description: "Animated counting numbers with multiple metrics",
   durationInFrames: 150,
   fps: 30,
+  category: "Charts" as const,
   code: `() => {
   const frame = Remotion.useCurrentFrame();
 
+  // Colors
+  const COLOR_BACKGROUND = "#0f172a";
+  const COLOR_TEXT = "white";
+  const COLOR_SECONDARY = "rgba(255, 255, 255, 0.7)";
+
+  // Text
+  const TITLE_TEXT = "2025 Stats";
+
+  // Data
   const counters = [
     { label: "Users", target: 12450, color: "#3b82f6", icon: "👥" },
     { label: "Revenue", target: 98750, prefix: "$", color: "#10b981", icon: "💰" },
     { label: "Projects", target: 342, color: "#f59e0b", icon: "📊" },
   ];
 
+  // Timing
+  const TITLE_FADE_DURATION = 20;
+  const CARD_FADE_DURATION = 15;
+  const COUNTER_DURATION = 50;
+  const CARD_DELAY_BASE = 30;
+  const CARD_STAGGER = 10;
+  const COUNTER_START_OFFSET = 10;
+
+  // Typography
+  const TITLE_FONT_SIZE = 72;
+  const VALUE_FONT_SIZE = 64;
+  const LABEL_FONT_SIZE = 24;
+  const ICON_FONT_SIZE = 60;
+
+  // Layout
+  const CONTAINER_PADDING = 100;
+  const TITLE_MARGIN_BOTTOM = 100;
+  const COUNTERS_GAP = 60;
+  const CARD_PADDING_Y = 50;
+  const CARD_PADDING_X = 60;
+  const CARD_BORDER_WIDTH = 3;
+  const CARD_BORDER_RADIUS = 24;
+  const CARD_MIN_WIDTH = 380;
+  const ICON_MARGIN_BOTTOM = 20;
+  const VALUE_MARGIN_BOTTOM = 10;
+  const LABEL_LETTER_SPACING = 2;
+
   // Title animation
-  const titleOpacity = Remotion.interpolate(frame, [0, 20], [0, 1], {
+  const titleOpacity = Remotion.interpolate(frame, [0, TITLE_FADE_DURATION], [0, 1], {
     extrapolateRight: "clamp",
   });
 
   return (
     <Remotion.AbsoluteFill
       style={{
-        backgroundColor: "#0f172a",
+        backgroundColor: COLOR_BACKGROUND,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding: 100,
+        padding: CONTAINER_PADDING,
       }}
     >
       {/* Title */}
-      <div style={{ opacity: titleOpacity, marginBottom: 100 }}>
+      <div style={{ opacity: titleOpacity, marginBottom: TITLE_MARGIN_BOTTOM }}>
         <h1
           style={{
-            fontSize: 72,
+            fontSize: TITLE_FONT_SIZE,
             fontWeight: "bold",
-            color: "white",
+            color: COLOR_TEXT,
             margin: 0,
             textAlign: "center",
             textShadow: "0 0 40px rgba(255, 255, 255, 0.3)",
           }}
         >
-          2025 Stats
+          {TITLE_TEXT}
         </h1>
       </div>
 
@@ -49,18 +86,18 @@ export const counterAnimation = {
       <div
         style={{
           display: "flex",
-          gap: 60,
+          gap: COUNTERS_GAP,
           alignItems: "center",
           justifyContent: "center",
         }}
       >
         {counters.map((counter, index) => {
-          const delay = 30 + index * 10;
+          const delay = CARD_DELAY_BASE + index * CARD_STAGGER;
 
           // Card animation
           const cardOpacity = Remotion.interpolate(
             frame,
-            [delay, delay + 15],
+            [delay, delay + CARD_FADE_DURATION],
             [0, 1],
             {
               extrapolateLeft: "clamp",
@@ -70,7 +107,7 @@ export const counterAnimation = {
 
           const cardScale = Remotion.interpolate(
             frame,
-            [delay, delay + 15],
+            [delay, delay + CARD_FADE_DURATION],
             [0.8, 1],
             {
               extrapolateLeft: "clamp",
@@ -79,11 +116,10 @@ export const counterAnimation = {
           );
 
           // Counter animation
-          const counterStart = delay + 10;
-          const counterDuration = 50;
+          const counterStart = delay + COUNTER_START_OFFSET;
           const currentValue = Remotion.interpolate(
             frame,
-            [counterStart, counterStart + counterDuration],
+            [counterStart, counterStart + COUNTER_DURATION],
             [0, counter.target],
             {
               extrapolateLeft: "clamp",
@@ -102,20 +138,21 @@ export const counterAnimation = {
               <div
                 style={{
                   backgroundColor: "#1e293b",
-                  padding: "50px 60px",
-                  borderRadius: 24,
-                  border: \`3px solid \${counter.color}\`,
+                  padding: \`\${CARD_PADDING_Y}px \${CARD_PADDING_X}px\`,
+                  borderRadius: CARD_BORDER_RADIUS,
+                  border: \`\${CARD_BORDER_WIDTH}px solid \${counter.color}\`,
                   boxShadow: \`0 20px 60px \${counter.color}40, 0 0 40px \${counter.color}20\`,
-                  minWidth: 280,
+                  minWidth: CARD_MIN_WIDTH,
                   textAlign: "center",
                 }}
               >
                 {/* Icon */}
                 <div
                   style={{
-                    fontSize: 60,
-                    marginBottom: 20,
+                    fontSize: ICON_FONT_SIZE,
+                    marginBottom: ICON_MARGIN_BOTTOM,
                     filter: "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))",
+                    minWidth: CARD_MIN_WIDTH,
                   }}
                 >
                   {counter.icon}
@@ -124,11 +161,12 @@ export const counterAnimation = {
                 {/* Counter Value */}
                 <div
                   style={{
-                    fontSize: 64,
+                    fontSize: VALUE_FONT_SIZE,
                     fontWeight: "bold",
                     color: counter.color,
-                    marginBottom: 10,
-                    fontFamily: "system-ui",
+                    marginBottom: VALUE_MARGIN_BOTTOM,
+                    minWidth: CARD_MIN_WIDTH,
+                    fontFamily: "monospace",
                     textShadow: \`0 0 20px \${counter.color}80\`,
                   }}
                 >
@@ -139,11 +177,11 @@ export const counterAnimation = {
                 {/* Label */}
                 <div
                   style={{
-                    fontSize: 24,
-                    color: "rgba(255, 255, 255, 0.7)",
+                    fontSize: LABEL_FONT_SIZE,
+                    color: COLOR_SECONDARY,
                     fontWeight: 600,
                     textTransform: "uppercase",
-                    letterSpacing: 2,
+                    letterSpacing: LABEL_LETTER_SPACING,
                   }}
                 >
                   {counter.label}

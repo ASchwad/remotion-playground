@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { templates, type RemotionTemplate } from "@/templates";
 import { Sparkles } from "lucide-react";
 
@@ -30,7 +31,12 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
             }`}
             onClick={() => onSelectTemplate(template)}
           >
-            <h3 className="font-semibold text-sm mb-1">{template.name}</h3>
+            <div className="flex items-start justify-between gap-2 mb-1">
+              <h3 className="font-semibold text-sm">{template.name}</h3>
+              <Badge variant="secondary" className="text-xs shrink-0">
+                {template.category}
+              </Badge>
+            </div>
             <p className="text-xs text-muted-foreground line-clamp-2">
               {template.description}
             </p>

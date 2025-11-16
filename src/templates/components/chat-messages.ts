@@ -4,6 +4,7 @@ export const chatMessages = {
   description: "WhatsApp-style animated chat messages with bouncy entrance",
   durationInFrames: 180,
   fps: 30,
+  category: "Text" as const,
   code: `() => {
   const frame = Remotion.useCurrentFrame();
   const { fps, width, height } = Remotion.useVideoConfig();
