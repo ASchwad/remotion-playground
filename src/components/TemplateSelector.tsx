@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { templates, type RemotionTemplate } from "@/templates";
+import { getCategoryColor } from "@/lib/utils";
 import { Sparkles } from "lucide-react";
 
 interface TemplateSelectorProps {
@@ -33,7 +34,10 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
           >
             <div className="flex items-start justify-between gap-2 mb-1">
               <h3 className="font-semibold text-sm">{template.name}</h3>
-              <Badge variant="secondary" className="text-xs shrink-0">
+              <Badge
+                variant={getCategoryColor(template.category).variant}
+                className={`text-xs shrink-0 ${getCategoryColor(template.category).className || ""}`}
+              >
                 {template.category}
               </Badge>
             </div>
