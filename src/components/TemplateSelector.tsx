@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { templates, type RemotionTemplate } from "@/templates";
@@ -36,7 +35,9 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
               <h3 className="font-semibold text-sm">{template.name}</h3>
               <Badge
                 variant={getCategoryColor(template.category).variant}
-                className={`text-xs shrink-0 ${getCategoryColor(template.category).className || ""}`}
+                className={`text-xs shrink-0 ${
+                  getCategoryColor(template.category).className || ""
+                }`}
               >
                 {template.category}
               </Badge>
